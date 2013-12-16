@@ -1,0 +1,23 @@
+{
+  "name": "validateSSHjs",
+  "version": "0.0.1",
+  "description": "Client-side validation for OpenSSH Public Keys",
+  "main": "dist/main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:resin-io/validateSSHjs.git"
+  },
+  "author": "resin.io",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/resin-io/validateSSHjs/issues"
+  },
+  "dependencies": {
+    "gulp": "~3.1.4",
+    "gulp-coffee": "~1.2.2",
+    "gulp-concat": "~2.1.2"
+  }
+}
