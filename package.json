@@ -4,7 +4,7 @@
   "description": "Client-side validation for OpenSSH Public Keys",
   "main": "dist/main.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "gulp test"
   },
   "repository": {
     "type": "git",
@@ -20,6 +20,7 @@
     "gulp": "~3.2.4",
     "gulp-coffee": "~1.2.5",
     "gulp-concat": "~2.1.7",
+    "gulp-mocha": "~0.2.0",
     "gulp-uglify": "~0.1.0",
     "gulp-util": "~2.2.6",
     "gulp-wrap-umd": "~0.1.0",

@@ -3,6 +3,7 @@ gulp = require 'gulp'
 coffee = require 'gulp-coffee'
 concat = require 'gulp-concat'
 gutil = require 'gulp-util'
+mocha = require 'gulp-mocha'
 uglify = require 'gulp-uglify'
 wrap = require 'gulp-wrap-umd'
 
@@ -23,6 +24,13 @@ gulp.task 'build', [ 'caffeinate' ], ->
 		)
 		.pipe(uglify())
 		.pipe(gulp.dest('./dist/'))
+
+	# TODO: Delete tmp folder after we are done.
+
+gulp.task 'test', [ 'build' ], ->
+	# TODO: Update/fork mocha plugin so it allows testing of .coffee files :)
+	gulp.src('tmp/*.js')
+		.pipe(mocha())
 
 gulp.task 'default', ->
 	gulp.run 'build'
