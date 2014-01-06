@@ -34,4 +34,3 @@ gulp.task 'default', ->
 		'src/validateSSH.coffee'
 	], (event) ->
 		gulp.run 'build'
-
