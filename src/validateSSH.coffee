@@ -24,7 +24,7 @@ uint8ArrayToInt = (arr) ->
 	len = arr.length
 	return 0 if len == 0
 
-	return arr[len-1] + (uint8ArrayToInt(arr.slice(0,len-1)) << 8)
+	return arr[len-1] + (uint8ArrayToInt(arr[...len-1]) << 8)
 
 uint8ArrayToString = (uintArray) ->
 	(String.fromCharCode(i) for i in uintArray).join('')
@@ -40,15 +40,16 @@ validateOpenSSHKey = (key) ->
 
 	uint8Array = base64binary.decode(key[1])
 
-	if uint8ArrayToInt(uint8Array.slice(0,4)) != 7
+	if uint8ArrayToInt(uint8Array[...4]) != 7
 		return 'invalid key type length'
 
-	if uint8ArrayToString(uint8Array.slice(4,11)) != 'ssh-rsa'
-		return "invalid key type: #{uint8ArrayToString(uint8Array.slice(4,11))}"
+	type = uint8ArrayToString(uint8Array[4..10])
+	if type != 'ssh-rsa'
+		return "invalid key type: #{type}"
 
-	secondLength = uint8ArrayToInt(uint8Array.slice(11,15))
+	secondLength = uint8ArrayToInt(uint8Array[11..14])
 	lengthSoFar = 4 + 7 + 4 + secondLength
-	thirdLength = uint8ArrayToInt(uint8Array.slice(lengthSoFar, lengthSoFar + 4))
+	thirdLength = uint8ArrayToInt(uint8Array[lengthSoFar..lengthSoFar+3])
 	lengthSoFar += 4 + thirdLength
 
 	if lengthSoFar != uint8Array.length
