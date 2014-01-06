@@ -1,4 +1,3 @@
-# Find plugins at https://npmjs.org/browse/keyword/gulpplugin
 gulp = require 'gulp'
 
 coffee = require 'gulp-coffee'
@@ -24,11 +23,9 @@ gulp.task 'build', ->
 		.pipe(uglify())
 		.pipe(gulp.dest('./dist/'))
 
-# The default task (called when you run `gulp`)
 gulp.task 'default', ->
 	gulp.run 'build'
 
-	# Watch files and run tasks if they change
 	gulp.watch [
 		'lib/base64-binary.js',
 		'src/validateSSH.coffee'
