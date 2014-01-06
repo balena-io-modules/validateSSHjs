@@ -16,8 +16,9 @@
     "url": "https://github.com/resin-io/validateSSHjs/issues"
   },
   "dependencies": {
-    "gulp": "~3.1.4",
-    "gulp-coffee": "~1.2.2",
-    "gulp-concat": "~2.1.2"
+    "coffee-script": "~1.6.3",
+    "gulp": "~3.2.4",
+    "gulp-coffee": "~1.2.5",
+    "gulp-concat": "~2.1.7"
   }
 }
