@@ -2,6 +2,7 @@
 gulp = require 'gulp'
 coffee = require 'gulp-coffee'
 concat = require 'gulp-concat'
+gutil = require 'gulp-util'
 
 gulp.task 'build', ->
 	sink = concat('main.js')
@@ -10,7 +11,7 @@ gulp.task 'build', ->
 		.pipe(sink, end: false)
 
 	gulp.src('src/validateSSH.coffee')
-		.pipe(coffee(bare: true))
+		.pipe(coffee(bare: true)).on('error', gutil.log)
 		.pipe(sink)
 
 	sink

@@ -19,6 +19,7 @@
     "coffee-script": "~1.6.3",
     "gulp": "~3.2.4",
     "gulp-coffee": "~1.2.5",
-    "gulp-concat": "~2.1.7"
+    "gulp-concat": "~2.1.7",
+    "gulp-util": "~2.2.6",
   }
 }
