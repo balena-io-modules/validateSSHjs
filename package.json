@@ -15,7 +15,7 @@
   "bugs": {
     "url": "https://github.com/resin-io/validateSSHjs/issues"
   },
-  "dependencies": {
+  "devDependencies": {
     "coffee-script": "~1.6.3",
     "gulp": "~3.2.4",
     "gulp-coffee": "~1.2.5",
@@ -23,6 +23,5 @@
     "gulp-uglify": "~0.1.0",
     "gulp-util": "~2.2.6",
     "gulp-wrap-umd": "~0.1.0"
-
   }
 }
