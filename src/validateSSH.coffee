@@ -55,11 +55,3 @@ validateOpenSSHKey = (key) ->
 			return "invalid key type: #{key[0]}"
 	else
 		return "invalid key structure"
-
-input = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDItBls3aRTbVzfpBlRLdDCn8tErUuhBa
-fqfu6mWoBalyo5+DcpTIWKP29RXNJw6tmPPAkUbWP6+I6MD9+ki1TWizIw9e8if6yhuEkBuTE8Lwimy
-00NkzrUgXBicdbQL8lwusEdF+CSSQ7/SOrnkThVObUO0ZL9oVWDUNdzWX9IUu16Uwq9ZtdXcQqFCnYD
-vYgdFUlUMKfe9jNEexQRBgnU4BjX89CNjgMhQ1i637QiVPKLHnLTd8u2b5V9f+UV9NYSfn37vcUGeNk
-FXauvMmpv5CY2ZxuCN873UUmvCTGmyH3n7KvfVxcBlz8QgI9cW77SzAqnh5TEU7hkGTLlW8hP petrosagg@rachmaninoff"
-
-console.log validateOpenSSHKey(input)
