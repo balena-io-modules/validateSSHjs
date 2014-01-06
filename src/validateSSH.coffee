@@ -20,12 +20,11 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 
-uint8ArrayToInt = (uintArray) ->
-	if uintArray.length > 0
-		len = uintArray.length
-		return uintArray[len-1] + (uint8ArrayToInt(uintArray.slice(0,len-1)) << 8)
-	else
-		return 0
+uint8ArrayToInt = (arr) ->
+	len = arr.length
+	return 0 if len == 0
+
+	return arr[len-1] + (uint8ArrayToInt(arr.slice(0,len-1)) << 8)
 
 uint8ArrayToString = (uintArray) ->
 	(String.fromCharCode(i) for i in uintArray).join('')
