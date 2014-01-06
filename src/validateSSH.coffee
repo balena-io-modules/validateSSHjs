@@ -30,15 +30,14 @@ uint8ArrayToString = (uintArray) ->
 	(String.fromCharCode(i) for i in uintArray).join('')
 
 validateOpenSSHKey = (key) ->
-	key = key.replace('\n', '').split(' ')
+	# See http://crypto.stackexchange.com/a/5948.
+	key = key.replace(/\r?\n/g, '')
+	key = /AAAAB3NzaC1yc2E[A-Za-z0-9+\/]+/.exec(key)?[0]
 
-	if key.length < 2 or key.length > 3
-		return 'invalid key structure'
+	if !key?
+		return 'missing header'
 
-	if key[0] != 'ssh-rsa'
-		return "invalid key type: #{key[0]}"
-
-	uint8Array = base64binary.decode(key[1])
+	uint8Array = base64binary.decode(key)
 
 	if uint8ArrayToInt(uint8Array[...4]) != 7
 		return 'invalid key type length'
