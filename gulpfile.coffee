@@ -6,17 +6,18 @@ gutil = require 'gulp-util'
 uglify = require 'gulp-uglify'
 wrap = require 'gulp-wrap-umd'
 
-gulp.task 'build', ->
-	sink = concat('main.js')
-
-	gulp.src('lib/base64-binary.js')
-		.pipe(sink, end: false)
-
-	gulp.src('src/validateSSH.coffee')
+gulp.task 'caffeinate', ->
+	gulp.src('src/*.coffee')
 		.pipe(coffee(bare: true)).on('error', gutil.log)
-		.pipe(sink)
+		.pipe(gulp.dest('./tmp/build'))
 
-	sink
+	gulp.src('test/*.coffee')
+		.pipe(coffee()).on('error', gutil.log)
+		.pipe(gulp.dest('./tmp'))
+
+gulp.task 'build', [ 'caffeinate' ], ->
+	gulp.src([ 'lib/*.js', 'tmp/build/*.js' ])
+		.pipe(concat('main.js'))
 		.pipe(wrap
 			exports: 'validateOpenSSHKey'
 		)
