@@ -33,25 +33,26 @@ uint8ArrayToString = (uintArray) ->
 validateOpenSSHKey = (key) ->
 	key = key.replace("\n", "").split(" ")
 
-	if 2 <= key.length <= 3
-		if key[0] == "ssh-rsa"
-			uint8Array = base64binary.decode(key[1])
-
-			if uint8ArrayToInt(uint8Array.slice(0,4)) == 7
-				if uint8ArrayToString(uint8Array.slice(4,11)) == "ssh-rsa"
-					secondLength = uint8ArrayToInt(uint8Array.slice(11,15))
-					lengthSoFar = 4 + 7 + 4 + secondLength
-					thirdLength = uint8ArrayToInt(uint8Array.slice(lengthSoFar, lengthSoFar + 4))
-					lengthSoFar += 4 + thirdLength
-					if lengthSoFar == uint8Array.length
-						return true
-					else
-						return "invalid key length"
-				else
-					return "invalid key type: #{uint8ArrayToString(uint8Array.slice(4,11))}"
-			else
-				return "invalid key type length"
-		else
-			return "invalid key type: #{key[0]}"
-	else
+	if key.length < 2 or key.length > 3
 		return "invalid key structure"
+
+	if key[0] != "ssh-rsa"
+		return "invalid key type: #{key[0]}"
+
+	uint8Array = base64binary.decode(key[1])
+
+	if uint8ArrayToInt(uint8Array.slice(0,4)) != 7
+		return "invalid key type length"
+
+	if uint8ArrayToString(uint8Array.slice(4,11)) != "ssh-rsa"
+		return "invalid key type: #{uint8ArrayToString(uint8Array.slice(4,11))}"
+
+	secondLength = uint8ArrayToInt(uint8Array.slice(11,15))
+	lengthSoFar = 4 + 7 + 4 + secondLength
+	thirdLength = uint8ArrayToInt(uint8Array.slice(lengthSoFar, lengthSoFar + 4))
+	lengthSoFar += 4 + thirdLength
+
+	if lengthSoFar != uint8Array.length
+		return "invalid key length"
+
+	return true
