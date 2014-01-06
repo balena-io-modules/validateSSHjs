@@ -3,6 +3,7 @@ gulp = require 'gulp'
 coffee = require 'gulp-coffee'
 concat = require 'gulp-concat'
 gutil = require 'gulp-util'
+wrap = require 'gulp-wrap-umd'
 
 gulp.task 'build', ->
 	sink = concat('main.js')
@@ -15,7 +16,10 @@ gulp.task 'build', ->
 		.pipe(sink)
 
 	sink
-		.pipe(gulp.dest('./dist/'));
+		.pipe(wrap
+			exports: 'validateOpenSSHKey'
+		)
+		.pipe(gulp.dest('./dist/'))
 
 # The default task (called when you run `gulp`)
 gulp.task 'default', ->
