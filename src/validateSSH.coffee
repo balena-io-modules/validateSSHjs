@@ -13,7 +13,7 @@ validate = (key) ->
 	key = /AAAAB3NzaC1yc2E[A-Za-z0-9+\/=]+/.exec(key)?[0]
 
 	if !key?
-		return 'missing header'
+		return 'Missing header.'
 
 	arr = base64binary.decode(key)
 
@@ -23,6 +23,6 @@ validate = (key) ->
 	lengthSoFar += 4 + thirdLength
 
 	if lengthSoFar != arr.length
-		return 'invalid key length'
+		return 'Invalid key length.'
 
 	return true
