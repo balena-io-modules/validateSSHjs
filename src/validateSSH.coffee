@@ -4,8 +4,8 @@ uint8ArrayToInt = (arr) ->
 
 	return arr[len-1] + (uint8ArrayToInt(arr[...len-1]) << 8)
 
-uint8ArrayToString = (uintArray) ->
-	(String.fromCharCode(i) for i in uintArray).join('')
+uint8ArrayToString = (arr) ->
+	(String.fromCharCode(i) for i in arr).join('')
 
 validate = (key) ->
 	# See http://crypto.stackexchange.com/a/5948.
