@@ -15,13 +15,14 @@ validate = (key) ->
 	if !key?
 		return 'missing header'
 
+	arr = base64binary.decode(key)
 
-	secondLength = uint8ArrayToInt(uint8Array[11..14])
+	secondLength = uint8ArrayToInt(arr[11..14])
 	lengthSoFar = 4 + 7 + 4 + secondLength
-	thirdLength = uint8ArrayToInt(uint8Array[lengthSoFar..lengthSoFar+3])
+	thirdLength = uint8ArrayToInt(arr[lengthSoFar..lengthSoFar+3])
 	lengthSoFar += 4 + thirdLength
 
-	if lengthSoFar != uint8Array.length
+	if lengthSoFar != arr.length
 		return 'invalid key length'
 
 	return true
