@@ -37,6 +37,6 @@ gulp.task 'default', ->
 
 	gulp.watch [
 		'lib/base64-binary.js',
-		'src/validateSSH.coffee'
+		'src/validate-ssh.coffee'
 	], (event) ->
 		gulp.run 'build'

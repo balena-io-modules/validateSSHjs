@@ -35,7 +35,7 @@
 
   gulp.task('default', function() {
     gulp.run('build');
-    return gulp.watch(['lib/base64-binary.js', 'src/validateSSH.coffee'], function(event) {
+    return gulp.watch(['lib/base64-binary.js', 'src/validate-ssh.coffee'], function(event) {
       return gulp.run('build');
     });
   });
