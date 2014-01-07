@@ -15,14 +15,6 @@ validate = (key) ->
 	if !key?
 		return 'missing header'
 
-	uint8Array = base64binary.decode(key)
-
-	if uint8ArrayToInt(uint8Array[...4]) != 7
-		return 'invalid key type length'
-
-	type = uint8ArrayToString(uint8Array[4..10])
-	if type != 'ssh-rsa'
-		return "invalid key type: #{type}"
 
 	secondLength = uint8ArrayToInt(uint8Array[11..14])
 	lengthSoFar = 4 + 7 + 4 + secondLength
