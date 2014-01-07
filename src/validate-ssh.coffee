@@ -7,10 +7,16 @@ uint8ArrayToInt = (arr) ->
 
 	return arr[len-1] + (uint8ArrayToInt(arr.subarray(0, len-1)) << 8)
 
-validate = (key) ->
+
+extract = (key) ->
 	# See http://crypto.stackexchange.com/a/5948.
-	key = key.replace(/\r?\n/g, '')
-	key = /AAAAB3NzaC1yc2E[A-Za-z0-9+\/=]+/.exec(key)?[0]
+	ret = key.replace(/\r?\n/g, '')
+	ret = /AAAAB3NzaC1yc2E[A-Za-z0-9+\/=]+/.exec(ret)?[0]
+
+	return ret
+
+validate = (key) ->
+	key = extract(key)
 
 	if !key?
 		return 'Missing header.'
@@ -26,3 +32,5 @@ validate = (key) ->
 		return 'Invalid key length.'
 
 	return true
+
+exposed = { extract, validate }

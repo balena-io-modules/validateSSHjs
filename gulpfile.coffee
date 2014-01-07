@@ -20,7 +20,7 @@ gulp.task 'build', [ 'caffeinate' ], ->
 	gulp.src([ 'lib/*.js', 'tmp/build/*.js' ])
 		.pipe(concat('main.js'))
 		.pipe(wrap
-			exports: 'validate'
+			exports: 'exposed'
 		)
 		.pipe(uglify())
 		.pipe(gulp.dest('./dist/'))
