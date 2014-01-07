@@ -1,3 +1,6 @@
+# Gets added by gulp build.
+# base64 = require 'base64binary'
+
 uint8ArrayToInt = (arr) ->
 	len = arr.length
 	return 0 if len == 0
