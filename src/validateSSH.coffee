@@ -10,7 +10,7 @@ uint8ArrayToString = (arr) ->
 validate = (key) ->
 	# See http://crypto.stackexchange.com/a/5948.
 	key = key.replace(/\r?\n/g, '')
-	key = /AAAAB3NzaC1yc2E[A-Za-z0-9+\/]+/.exec(key)?[0]
+	key = /AAAAB3NzaC1yc2E[A-Za-z0-9+\/=]+/.exec(key)?[0]
 
 	if !key?
 		return 'missing header'
