@@ -1,29 +1,42 @@
-# Find plugins at https://npmjs.org/browse/keyword/gulpplugin
 gulp = require 'gulp'
+
 coffee = require 'gulp-coffee'
 concat = require 'gulp-concat'
+gutil = require 'gulp-util'
+mocha = require 'gulp-mocha'
+uglify = require 'gulp-uglify'
+wrap = require 'gulp-wrap-umd'
 
-gulp.task 'build', ->
-	sink = concat('main.js')
+gulp.task 'caffeinate', ->
+	gulp.src('src/*.coffee')
+		.pipe(coffee(bare: true)).on('error', gutil.log)
+		.pipe(gulp.dest('./tmp/build'))
 
-	gulp.src('lib/base64-binary.js')
-		.pipe(sink, end: false)
+	gulp.src('test/*.coffee')
+		.pipe(coffee()).on('error', gutil.log)
+		.pipe(gulp.dest('./tmp'))
 
-	gulp.src('src/validateSSH.coffee')
-		.pipe(coffee(bare: true))
-		.pipe(sink)
+gulp.task 'build', [ 'caffeinate' ], ->
+	gulp.src([ 'lib/*.js', 'tmp/build/*.js' ])
+		.pipe(concat('main.js'))
+		.pipe(wrap
+			exports: 'validate'
+		)
+		.pipe(uglify())
+		.pipe(gulp.dest('./dist/'))
 
-	sink
-		.pipe(gulp.dest('./dist/'));
+	# TODO: Delete tmp folder after we are done.
 
-# The default task (called when you run `gulp`)
+gulp.task 'test', [ 'build' ], ->
+	# TODO: Update/fork mocha plugin so it allows testing of .coffee files :)
+	gulp.src('tmp/*.js')
+		.pipe(mocha())
+
 gulp.task 'default', ->
 	gulp.run 'build'
 
-	# Watch files and run tasks if they change
 	gulp.watch [
 		'lib/base64-binary.js',
 		'src/validateSSH.coffee'
 	], (event) ->
 		gulp.run 'build'
-

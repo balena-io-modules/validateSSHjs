@@ -1,0 +1,21 @@
+{
+  "name": "validateSSHjs",
+  "version": "0.1.1",
+  "homepage": "https://github.com/resin-io/validateSSHjs",
+  "authors": [
+    "resin <hello@resin.io>"
+  ],
+  "description": "Client-side validation for public SSH keys",
+  "main": "dist/main.js",
+  "keywords": [
+    "ssh"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
