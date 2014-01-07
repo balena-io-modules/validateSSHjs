@@ -20,7 +20,7 @@ gulp.task 'build', [ 'caffeinate' ], ->
 	gulp.src([ 'lib/*.js', 'tmp/build/*.js' ])
 		.pipe(concat('main.js'))
 		.pipe(wrap
-			exports: 'validateOpenSSHKey'
+			exports: 'validate'
 		)
 		.pipe(uglify())
 		.pipe(gulp.dest('./dist/'))

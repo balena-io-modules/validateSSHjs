@@ -7,7 +7,7 @@ uint8ArrayToInt = (arr) ->
 uint8ArrayToString = (uintArray) ->
 	(String.fromCharCode(i) for i in uintArray).join('')
 
-validateOpenSSHKey = (key) ->
+validate = (key) ->
 	# See http://crypto.stackexchange.com/a/5948.
 	key = key.replace(/\r?\n/g, '')
 	key = /AAAAB3NzaC1yc2E[A-Za-z0-9+\/]+/.exec(key)?[0]
