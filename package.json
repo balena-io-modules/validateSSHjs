@@ -1,6 +1,6 @@
 {
   "name": "validateSSHjs",
-  "version": "0.2.1",
+  "version": "0.2.3",
   "description": "Client-side validation for public SSH keys",
   "main": "dist/main.js",
   "scripts": {
