@@ -11,9 +11,9 @@ uint8ArrayToInt = (arr) ->
 extract = (key) ->
 	return null if typeof key != 'string'
 
-	# See http://crypto.stackexchange.com/a/5948.
+	# See http://crypto.stackexchange.com/a/5948. We also allow DSA.
 	ret = key.replace(/\r?\n/g, '')
-	ret = /AAAAB3NzaC1yc2E[A-Za-z0-9+\/=]+/.exec(ret)?[0]
+	ret = /AAAAB3NzaC1(?:yc2E|kc3M)[A-Za-z0-9+\/=]+/.exec(ret)?[0]
 
 	return ret
 
