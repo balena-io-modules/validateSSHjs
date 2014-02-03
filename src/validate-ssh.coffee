@@ -26,14 +26,16 @@ classify = (key) ->
 	switch matches[1]
 		when 'yc2E' then { type: 'rsa', key }
 		when 'kc3M' then { type: 'dsa', key }
-		else throw new Error('Unrecognised type.')
+		else null
 
 extract = (key) ->
 	# TODO: Reduce duplcate work.
 	return classify(key)?.key
 
 validate = (key) ->
-	{ type, key } = classify(key)
+	classification = classify(key)
+	return 'Invalid key.' if !classification?
+	{ type, key } = classification
 
 	if !key?
 		return 'Missing header.'
